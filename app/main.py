@@ -37,10 +37,6 @@ async def create_post(blog_post: BlogPostCreate, current_user: User = Depends(ge
     post_id = create_blog_post(blog_post, current_user.username)
     return BlogPostResponse(id=post_id, **blog_post.dict(), author=current_user.username)
 
-@app.get("/posts/", response_model=List[BlogPostResponse])
-async def read_posts():
-    posts = get_blog_posts()
-    return posts
 
 @app.get("/posts/{post_id}", response_model=BlogPostResponse)
 async def get_post(post_id: str):
